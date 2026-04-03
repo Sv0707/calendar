@@ -2,7 +2,9 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
+import interactionPlugin, {
+  DateClickArg,
+} from "@fullcalendar/interaction";
 import {
   EventClickArg,
   EventContentArg,
@@ -10,6 +12,12 @@ import {
 } from "@fullcalendar/core";
 import { CalendarEvent, CalendarView } from "../../types/calendar";
 import "./CalendarPanel.css";
+
+type DateSelectArg = {
+  start: Date;
+  end: Date;
+  jsEvent: MouseEvent | null;
+};
 
 const renderEventContent = (arg: EventContentArg) => {
   const background = arg.event.backgroundColor || "#3B86FF";
@@ -28,6 +36,7 @@ type CalendarPanelProps = {
   currentView: CalendarView;
   headerTitle: string;
   onDateClick: (arg: DateClickArg) => void;
+  onDateSelect: (arg: DateSelectArg) => void;
   onEventClick: (arg: EventClickArg) => void;
   onEventChange: (eventId: string, start: Date, end: Date | null) => void;
   onViewChange: (view: CalendarView) => void;
@@ -43,6 +52,7 @@ export const CalendarPanel = ({
   currentView,
   headerTitle,
   onDateClick,
+  onDateSelect,
   onEventClick,
   onEventChange,
   onViewChange,
@@ -50,32 +60,32 @@ export const CalendarPanel = ({
   onNext,
   onToday,
 }: CalendarPanelProps) => {
-const isToday = (() => {
-  const today = new Date();
+  const isToday = (() => {
+    const today = new Date();
 
-  if (currentView === "dayGridMonth") {
-    return (
-      currentDate.getFullYear() === today.getFullYear() &&
-      currentDate.getMonth() === today.getMonth()
-    );
-  }
+    if (currentView === "dayGridMonth") {
+      return (
+        currentDate.getFullYear() === today.getFullYear() &&
+        currentDate.getMonth() === today.getMonth()
+      );
+    }
 
-  if (currentView === "timeGridWeek" || currentView === "listWeek") {
-    const api = calendarRef.current?.getApi();
-    if (!api) return false;
+    if (currentView === "timeGridWeek" || currentView === "listWeek") {
+      const api = calendarRef.current?.getApi();
+      if (!api) return false;
 
-    const start = api.view.activeStart;
-    const end = api.view.activeEnd;
+      const start = api.view.activeStart;
+      const end = api.view.activeEnd;
 
-    return today >= start && today < end;
-  }
+      return today >= start && today < end;
+    }
 
-  if (currentView === "timeGridDay") {
-    return currentDate.toDateString() === today.toDateString();
-  }
+    if (currentView === "timeGridDay") {
+      return currentDate.toDateString() === today.toDateString();
+    }
 
-  return false;
-})();
+    return false;
+  })();
 
   return (
     <section className="calendar-card">
@@ -129,6 +139,7 @@ const isToday = (() => {
             </button>
           </div>
         </div>
+
         <div className="calendar-card__header-row">
           <div className="calendar-card__controls">
             <button
@@ -164,6 +175,10 @@ const isToday = (() => {
         height="auto"
         allDaySlot
         editable
+        selectable
+        selectMirror
+        selectMinDistance={0}
+        unselectAuto={false}
         eventStartEditable
         eventDurationEditable
         dayMaxEvents={3}
@@ -172,7 +187,8 @@ const isToday = (() => {
         nowIndicator
         firstDay={0}
         events={events}
-        dateClick={onDateClick}
+        dateClick={currentView === "dayGridMonth" ? onDateClick : undefined}
+        select={onDateSelect}
         eventClick={onEventClick}
         eventDrop={(arg: EventDropArg) =>
           onEventChange(

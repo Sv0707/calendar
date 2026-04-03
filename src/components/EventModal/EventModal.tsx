@@ -146,7 +146,10 @@ export const EventModal = ({
 
           <div
             className="event-modal__field event-modal__field--date"
+            role="button"
+            tabIndex={0}
             onClick={openDatePicker}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openDatePicker(); } }}
           >
             <input
               ref={dateInputRef}
@@ -165,7 +168,10 @@ export const EventModal = ({
 
           <div
             className="event-modal__field event-modal__field--time"
+            role="button"
+            tabIndex={0}
             onClick={openTimePicker}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openTimePicker(); } }}
           >
             <input
               ref={timeInputRef}

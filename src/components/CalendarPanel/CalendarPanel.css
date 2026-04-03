@@ -90,7 +90,7 @@
 
 .calendar-card__title {
   font-size: 22px;
-  color: #4D4F5C;
+  color: #4d4f5c;
   font-weight: 400;
   text-align: center;
   white-space: nowrap;
@@ -111,7 +111,7 @@
 }
 
 .fc {
-  --fc-border-color: #EAF0F4;
+  --fc-border-color: #eaf0f4;
   --fc-page-bg-color: #fff;
   --fc-neutral-bg-color: #f8f8fc;
   --fc-list-event-hover-bg-color: #f5f4fa;
@@ -126,10 +126,10 @@
 }
 
 .fc .fc-col-header-cell {
-  background: #F5F6FA;
+  background: #f5f6fa;
   font-size: 11px;
   font-weight: 700;
-  color: #A3A6B4;
+  color: #a3a6b4;
   text-transform: uppercase;
   border-left: none;
   border-right: none;
@@ -163,7 +163,7 @@
 .fc .fc-timegrid-col-frame,
 .fc .fc-list-day-text,
 .fc .fc-list-day-side-text {
-  color: #43425D;
+  color: #43425d;
   font-size: 15px;
 }
 
@@ -174,7 +174,7 @@
 }
 
 .fc .fc-day-today {
-  background-color: #F5F6FA !important;
+  background-color: #f5f6fa !important;
 }
 
 .fc .fc-daygrid-day:hover {
@@ -186,13 +186,13 @@
 }
 
 .fc .fc-timegrid-now-indicator-line {
-  border-color: #3B86FF;
+  border-color: #3b86ff;
   border-width: 2px;
 }
 
 .fc .fc-timegrid-now-indicator-arrow {
-  border-color: #3B86FF;
-  color: #3B86FF;
+  border-color: #3b86ff;
+  color: #3b86ff;
   width: 6px;
 }
 
@@ -200,6 +200,12 @@
   border: none;
   background: transparent;
   padding: 0;
+}
+
+.fc .fc-highlight {
+  background: transparent;
+  box-shadow: 0px 3px 6px #00000029;
+  border: 1px solid #eaf0f4;
 }
 
 .fc-event-custom {
@@ -227,7 +233,7 @@
 }
 
 .fc .fc-list-event-dot {
-  border-color: #3B86FF;
+  border-color: #3b86ff;
 }
 
 .fc .fc-list-event-title a,
