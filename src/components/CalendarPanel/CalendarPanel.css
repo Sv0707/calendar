@@ -112,7 +112,7 @@
 
 .fc {
   --fc-border-color: #EAF0F4;
-  --fc-page-bg-color: transparent;
+  --fc-page-bg-color: #fff;
   --fc-neutral-bg-color: #f8f8fc;
   --fc-list-event-hover-bg-color: #f5f4fa;
   color: #656379;
@@ -148,6 +148,10 @@
 
 .fc .fc-toolbar {
   display: none;
+}
+
+.fc .fc-daygrid-day-frame {
+  min-height: 135px;
 }
 
 .fc .fc-timegrid-axis-frame,

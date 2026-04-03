@@ -31,6 +31,8 @@ export const EventModal = ({
   const [values, setValues] = useState<EventFormValues>(initialValues);
   const [error, setError] = useState("");
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const dateInputRef = useRef<HTMLInputElement>(null);
+  const timeInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setValues(initialValues);
@@ -70,6 +72,26 @@ export const EventModal = ({
     });
   };
 
+  const openDatePicker = () => {
+    const input = dateInputRef.current;
+    if (!input) return;
+
+    input.focus();
+    if ("showPicker" in input) {
+      input.showPicker();
+    }
+  };
+
+  const openTimePicker = () => {
+    const input = timeInputRef.current;
+    if (!input) return;
+
+    input.focus();
+    if ("showPicker" in input) {
+      input.showPicker();
+    }
+  };
+
   return (
     <dialog
       ref={dialogRef}
@@ -104,6 +126,7 @@ export const EventModal = ({
         >
           ×
         </button>
+
         <form onSubmit={handleSubmit}>
           <div className="event-modal__field">
             <input
@@ -121,11 +144,14 @@ export const EventModal = ({
             />
           </div>
 
-          <div className="event-modal__field event-modal__field--date">
+          <div
+            className="event-modal__field event-modal__field--date"
+            onClick={openDatePicker}
+          >
             <input
+              ref={dateInputRef}
               id="event-date"
               type="date"
-                            placeholder="event date"
               value={values.date}
               onChange={(event) =>
                 setValues((current) => ({
@@ -136,11 +162,15 @@ export const EventModal = ({
               required
             />
           </div>
-          <div className="event-modal__field event-modal__field--time">
+
+          <div
+            className="event-modal__field event-modal__field--time"
+            onClick={openTimePicker}
+          >
             <input
+              ref={timeInputRef}
               id="event-time"
               type="time"
-                            placeholder="event time"
               value={values.time}
               onChange={(event) =>
                 setValues((current) => ({
@@ -173,11 +203,13 @@ export const EventModal = ({
               ))}
             </div>
           </div>
+
           {error ? (
             <div className="event-modal__error" role="alert">
               {error}
             </div>
           ) : null}
+
           <div className="event-modal__actions">
             {values.id ? (
               <button
