@@ -43,24 +43,30 @@ const fromExistingEvent = (event: {
 
 function App() {
   const calendarRef = useRef<FullCalendar>(null);
-  const { events, addEvent, updateEvent, deleteEvent, moveEvent } = useCalendarEvents();
+  const { events, addEvent, updateEvent, deleteEvent, moveEvent } =
+    useCalendarEvents();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currentView, setCurrentView] = useState<CalendarView>("dayGridMonth");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"create" | "edit">("create");
   const [formValues, setFormValues] = useState<EventFormValues>(
-    createFormValues(new Date("2026-01-02T08:00:00"))
+    createFormValues(new Date("2026-01-02T08:00:00")),
   );
-  const [modalPosition, setModalPosition] = useState<{ top: number; left: number } | null>(null);
+  const [modalPosition, setModalPosition] = useState<{
+    top: number;
+    left: number;
+  } | null>(null);
 
   const headerTitle = useMemo(
     () => formatHeaderTitle(currentDate, currentView),
-    [currentDate, currentView]
+    [currentDate, currentView],
   );
 
-  const getCalendarApi = (): CalendarApi | null => calendarRef.current?.getApi() ?? null;
+  const getCalendarApi = (): CalendarApi | null =>
+    calendarRef.current?.getApi() ?? null;
 
   const closeModal = () => {
+    calendarRef.current?.getApi().unselect();
     setIsModalOpen(false);
     setModalPosition(null);
   };
@@ -141,12 +147,12 @@ function App() {
 
     const left = Math.max(
       gutter,
-      Math.min(x - modalWidth / 2, window.innerWidth - modalWidth - gutter)
+      Math.min(x - modalWidth / 2, window.innerWidth - modalWidth - gutter),
     );
 
     const top = Math.max(
       gutter,
-      Math.min(y + 12, window.innerHeight - modalHeight - gutter)
+      Math.min(y + 12, window.innerHeight - modalHeight - gutter),
     );
 
     setModalPosition({ top, left });
@@ -169,13 +175,13 @@ function App() {
       gutter,
       Math.min(
         rect.left + rect.width / 2 - modalWidth / 2,
-        window.innerWidth - modalWidth - gutter
-      )
+        window.innerWidth - modalWidth - gutter,
+      ),
     );
 
     const top = Math.max(
       gutter,
-      Math.min(rect.bottom - 5, window.innerHeight - modalHeight - gutter)
+      Math.min(rect.bottom - 5, window.innerHeight - modalHeight - gutter),
     );
 
     setModalPosition({ top, left });
@@ -220,7 +226,11 @@ function App() {
     setIsModalOpen(true);
   };
 
-  const handleEventChange = (eventId: string, start: Date, end: Date | null) => {
+  const handleEventChange = (
+    eventId: string,
+    start: Date,
+    end: Date | null,
+  ) => {
     closeModal();
     moveEvent(eventId, start, end);
   };

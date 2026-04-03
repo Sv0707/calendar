@@ -176,7 +176,7 @@ export const CalendarPanel = ({
         allDaySlot
         editable
         selectable
-        selectMirror
+        selectMirror={false}
         selectMinDistance={0}
         unselectAuto={false}
         eventStartEditable
