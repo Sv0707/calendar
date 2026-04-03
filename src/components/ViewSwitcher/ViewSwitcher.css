@@ -1,0 +1,57 @@
+.view-switcher {
+  display: flex;
+  gap: 0;
+}
+
+.view-switcher__button {
+  min-width: 44px;
+  padding: 8px 20px;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #d7dae2;
+  background: #ffffff;
+  color: #4d4f5c;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.view-switcher__button:hover:not(.view-switcher__button--active) {
+  background: #f8f8fa;
+  border-color: #c9cad5;
+}
+
+.view-switcher__button:active {
+  background: #f5f4fa;
+}
+
+.view-switcher__button + .view-switcher__button {
+  margin-left: -1px;
+}
+
+.view-switcher__button:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.view-switcher__button:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.view-switcher__button--active {
+  color: #3b86ff;
+  background: #ffffff;
+  border-color: #3b86ff;
+  font-weight: 600;
+  box-shadow: 0px 2px 3px rgba(59, 134, 255, 0.15);
+}
+
+.view-switcher__button--active:hover {
+  background: #f5f8ff;
+}
+
+@media (max-width: 768px) {
+  .view-switcher__button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,80 @@
+:root {
+  font-family: "Source Sans Pro", sans-serif;
+  color: #48475c;
+  background: #efedf6;
+  line-height: 1.4;
+  font-weight: 400;
+  --primary-color: #3b86ff;
+  --primary-dark: #2a5dcc;
+  --text-primary: #48475c;
+  --text-secondary: #7b7990;
+  --bg-light: #efedf6;
+  --bg-white: #ffffff;
+  --border-color: #eceaf2;
+  --transition: 0.2s ease-in-out;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg-light);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+input {
+  transition: border-color var(--transition);
+}
+
+input:focus {
+  outline: none;
+}
+
+.app-shell {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 260px 1fr;
+}
+
+.app-shell__main {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  padding: 32px 75px 100px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.page-title {
+  margin: 0 0 32px;
+  color: var(--color);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+@media (max-width: 860px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+}
